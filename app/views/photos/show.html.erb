@@ -1,5 +1,4 @@
-<h1>Photos#show</h1>
-<p>Find me in app/views/photos/show.html.erb</p>
+<h1>Просмотр фото</h1>
 <%= image_tag @photo.image.url(:medium) %>
 
 
@@ -27,9 +26,6 @@
   </li>
   <% end %>
 </ul>
-
-
-
 
 
 <% if @photo.comments.any? %>

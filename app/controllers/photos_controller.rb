@@ -1,17 +1,19 @@
 class PhotosController < ApplicationController
-  # добить круд - подключить бустрап, навести красоту на лайауте, в круде
-  # подключить канкан  like - dislike
 
   def index
     @photos = Photo.all
   end
 
   def show
+
     @photo = Photo.find(params[:id])
+    authorize! :read, @photo
   end
 
   def edit
+
     @photo = Photo.find(params[:id])
+    authorize! :update, @photo
   end
 
   def new
@@ -30,7 +32,8 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    Product.find(params[:id]).destroy
+    authorize! :update, @photo
+    Photo.find(params[:id]).destroy
     flash[:success] = "Фото успешно удалена!"
     redirect_to root_path
   end

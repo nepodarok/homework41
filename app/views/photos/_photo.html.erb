@@ -1,3 +1,13 @@
 <li>
-  <%= image_tag photo.image.url(:medium) %> - <%= link_to "Редактировать", edit_photo_path(photo)%>- <%= link_to "Просмотр", photo%>
+  <%= image_tag photo.image.url(:medium) %>
+  <% if can? :update, photo%>
+   <%= link_to "Редактировать", edit_photo_path(photo)%>-
+  <% end %>
+
+  <% if can? :destroy, photo%>
+   <%= link_to "Удалить", photo, method: :delete, data: { confirm: "Are you sure?" }%>-
+  <% end %>
+
+   <%= link_to "Просмотр", photo%>
 </li>
+<li><%= photo.user.id %></li>
