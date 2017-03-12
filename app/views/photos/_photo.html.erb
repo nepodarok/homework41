@@ -1,1 +1,3 @@
-<li><%= image_tag photo.image.url(:medium) %> - <%= link_to "Редактировать", edit_photo_path(photo)%></li>
+<li>
+  <%= image_tag photo.image.url(:medium) %> - <%= link_to "Редактировать", edit_photo_path(photo)%>- <%= link_to "Просмотр", photo%>
+</li>

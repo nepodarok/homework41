@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'cancan'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
