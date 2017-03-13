@@ -1,39 +1,46 @@
 <h1>Просмотр фото</h1>
 <%= image_tag @photo.image.url(:medium) %>
 
-
-
-<hr>
-<%= @photo.user.following.count %> - юзер подписан
-<hr>
-<%= @photo.user.followers.count %> - на юзера подписались:
-<hr>
-
 <ul>
+  <li><%= @photo.user.following.count %> - юзер подписан</li>
+  <li><%= @photo.user.followers.count %> - на юзера подписались:</li>
+  <li><%= @photo.likes.count %> - фоточку лайкнули:</li>
+</ul>
+
+<% if @like = Like.find_by(user_id: current_user.id, photo_id: @photo.id) %>
+  <%= link_to( "UNLIKE", @like, class: "btn btn-primary", method: :delete, data: { confirm: "Are you sure?"}) %>
+<% else %>
+  <%= form_for(:like, url: likes_path) do |f| %>
+  <%= hidden_field_tag :photo_id, @photo.id %>
+  <%= f.submit "LIKE", class: "btn" %>
+  <% end %>
+<% end %>
+
+
+<hr>
+
   <% if current_user.following?(@photo.user) %>
-    <li>
+
       <%= form_for(current_user.active_relationships.find_by(followed_id: @photo.user.id),
                  html: { method: :delete }) do |f| %>
       <%= f.submit "Unfollow", class: "btn" %>
       <% end %>
-    </li>
+
   <% else %>
-  <li>
+
     <%= form_for(current_user.active_relationships.build) do |f| %>
       <div><%= hidden_field_tag :followed_id, @photo.user.id %></div>
       <%= f.submit "Follow", class: "btn btn-primary" %>
     <% end %>
-  </li>
+
   <% end %>
-</ul>
 
 
 <% if @photo.comments.any? %>
   <% @photo.comments.each do |c| %>
-    <hr> <%= c.content %> <hr>
+    <hr> <%= c.content %> 
   <% end %>
 <% end %>
-
 
 <%= form_for @comment = Comment.new do |f| %>
 <%= f.text_area :content %>

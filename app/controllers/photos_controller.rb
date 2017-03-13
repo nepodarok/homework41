@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :show]
   def index
     @photos = Photo.all
   end

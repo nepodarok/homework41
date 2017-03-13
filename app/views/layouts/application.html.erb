@@ -22,7 +22,7 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><%= link_to "Лента", photos_path %></li>
+          <li><%= link_to "Лента", my_lenta_path %></li>
           <% if current_user %>
           <li><%= link_to "Мой профиль", edit_user_registration_path(current_user), class: 'navbar-link' %></li>
           <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
